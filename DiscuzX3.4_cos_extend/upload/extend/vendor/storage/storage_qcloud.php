@@ -132,6 +132,63 @@ class QcloudBass
         }
     }
 
+
+    /**
+     * get user Uin by secretId and secretKey
+     * @return string
+     */
+    private function getUserUin($secret_id, $secret_key) {
+        try {
+            $options = [
+                'headers' => $this->getSignatureHeaders($secret_id, $secret_key),
+                'body' => '{}'
+            ];
+            $response = (new Client(['base_uri' => 'https://ms.tencentcloudapi.com']))
+                ->post('/', $options)
+                ->getBody()
+                ->getContents();
+            $response = \GuzzleHttp\json_decode($response);
+            return $response->Response->UserUin;
+        } catch (\Exception $e) {
+            return '';
+        }
+    }
+
+    private function getSignatureHeaders($secret_id, $secret_key) {
+        $headers = array();
+        $service = 'ms';
+        $timestamp = time();
+        $algo = 'TC3-HMAC-SHA256';
+        $headers['Host'] = 'ms.tencentcloudapi.com';
+        $headers['X-TC-Action'] = 'DescribeUserBaseInfoInstance';
+        $headers['X-TC-RequestClient'] = 'SDK_PHP_3.0.187';
+        $headers['X-TC-Timestamp'] = $timestamp;
+        $headers['X-TC-Version'] = '2018-04-08';
+        $headers['Content-Type'] = 'application/json';
+
+        $canonicalHeaders = 'content-type:' . $headers['Content-Type'] . "\n" .
+            'host:' . $headers['Host'] . "\n";
+        $canonicalRequest = "POST\n/\n\n" .
+            $canonicalHeaders . "\n" .
+            "content-type;host\n" .
+            hash('SHA256', '{}');
+        $date = gmdate('Y-m-d', $timestamp);
+        $credentialScope = $date . '/' . $service . '/tc3_request';
+        $str2sign = $algo . "\n" .
+            $headers['X-TC-Timestamp'] . "\n" .
+            $credentialScope . "\n" .
+            hash('SHA256', $canonicalRequest);
+
+        $dateKey = hash_hmac('SHA256', $date, 'TC3' . $secret_key, true);
+        $serviceKey = hash_hmac('SHA256', $service, $dateKey, true);
+        $reqKey = hash_hmac('SHA256', 'tc3_request', $serviceKey, true);
+        $signature = hash_hmac('SHA256', $str2sign, $reqKey);
+
+        $headers['Authorization'] = $algo . ' Credential=' . $secret_id . '/' . $credentialScope .
+            ', SignedHeaders=content-type;host, Signature=' . $signature;
+        return $headers;
+    }
+
     /**
      * 保存公共密钥时发送用户使用插件的信息，不含隐私信息
      */
@@ -148,7 +205,7 @@ class QcloudBass
         );
 
         if (!empty($this->secret_id) && !empty($this->secret_key)) {
-            $static_data['data']['uin'] = $this->getUserUinBySecret($this->secret_id, $this->secret_key);
+            $static_data['data']['uin'] = $this->getUserUin($this->secret_id, $this->secret_key);
         }
 
         if (empty($static_data['data']['uin'])) {
@@ -227,40 +284,6 @@ class QcloudBass
         }
         ob_end_clean();
     }
-
-    /**
-     * 获取用户基础信息 UserUin
-     * @param $option string 腾讯云账号的密钥信息 SecretId 和SecretKey
-     * @return bool|mixed UserUin的值
-     */
-    public function getUserUinBySecret($secret_id, $secret_key)
-    {
-        if ( empty($secret_id) || empty($secret_key)) {
-            return '';
-        }
-        try {
-            $cred = new Credential($secret_id, $secret_key);
-            $httpProfile = new HttpProfile();
-            $httpProfile->setEndpoint("ms.tencentcloudapi.com");
-            $clientProfile = new ClientProfile();
-            $clientProfile->setHttpProfile($httpProfile);
-            $client = new MsClient($cred, "", $clientProfile);
-            $req = new DescribeUserBaseInfoInstanceRequest();
-            $params = "{}";
-            $req->fromJsonString($params);
-
-            $resp = $client->DescribeUserBaseInfoInstance($req);
-            if (is_object($resp)) {
-                $result = json_decode($resp->toJsonString(), true);
-                return isset($result['UserUin']) ? $result['UserUin'] : '';
-            } else {
-                return '';
-            }
-        } catch (TencentCloudSDKException $e) {
-            echo '';
-        }
-    }
-
 
     /**
      * 检查存储桶是否存在
