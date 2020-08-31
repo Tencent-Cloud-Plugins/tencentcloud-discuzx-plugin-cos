@@ -10,9 +10,8 @@
 | 适用平台 | [Discuz! X](https://www.discuz.net) |
 | 适用产品 | [腾讯云对象存储（COS）](https://cloud.tencent.com/product/cos)      |
 | GitHub项目| [Discuz! X 官方 Git ](https://gitee.com/ComsenzDiscuz/DiscuzX) |
-| 主创团队   | 腾讯云中小企业产品中心（SMB Product Center of Tencent Cloud）  
-- 本项目由腾讯云中小企业产品中心建设和维护
-- 请通过[咨询建议](https://support.qq.com/products/164613)向我们提交宝贵意见。
+| 主创团队   | 腾讯云中小企业产品中心（SMB Product Center of Tencent Cloud）  |
+| 反馈地址   | 请通过[咨询建议](https://support.qq.com/products/164613)向我们提交宝贵意见  |
 
 ## 2.功能特性
 
