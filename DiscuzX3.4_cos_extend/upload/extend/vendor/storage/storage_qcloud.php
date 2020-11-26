@@ -28,7 +28,7 @@ class QcloudBass
     private $site_app = 'Discuz! X';
     private $action = 'save_config';
     private $plugin_type = 'cos';
-    private $upload_url = 'https://openapp.qq.com/api/public/index.php/upload';
+    private $upload_url = 'https://appdata.qq.com/upload';
 
     public function __construct($secret_id, $secret_key, $region, $bucket)
     {
