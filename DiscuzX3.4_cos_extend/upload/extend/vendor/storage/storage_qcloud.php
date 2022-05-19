@@ -56,7 +56,8 @@ class QcloudBass
                 'credentials' => array(
                     'secretId' => $secret_id,
                     'secretKey' => $secret_key
-                )
+                ),
+                'userAgent' => "discuzx"
             )
         );
     }
