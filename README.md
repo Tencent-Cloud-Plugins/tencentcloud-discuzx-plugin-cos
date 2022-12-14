@@ -1,16 +1,17 @@
 # 腾讯云对象存储扩展
 
 ## 1.扩展介绍
+
 > 腾讯云对象存储扩展给Discuz！X站点用户提供附件远程存储功能。实现网站静态媒体资源与腾讯云COS的互通，有效降低本地存储负载，提升用户访问网站媒体资源的体验。
 
 | 标题       | 内容                                                         |
 | ---------- | ------------------------------------------------------------ |
-| 中文名称     | 腾讯云对象存储扩展                                         |
-| 最新版本   | v1.0.2 (2022.11.30)                                         |
-| 适用平台 | [Discuz! X3.4](https://www.discuz.net) |
-| 适用产品 | [腾讯云对象存储（COS）](https://cloud.tencent.com/product/cos)      |
-| GitHub项目| [Discuz! X 官方 Git ](https://gitee.com/ComsenzDiscuz/DiscuzX) |
-| 主创团队   | 腾讯云COS |
+| 中文名称   | 腾讯云对象存储扩展                                           |
+| 最新版本   | v1.0.2 (2022.11.30)                                          |
+| 适用平台   | [Discuz! X3.4](https://www.discuz.net)                       |
+| 适用产品   | [腾讯云对象存储（COS）](https://cloud.tencent.com/product/cos) |
+| GitHub项目 | [Discuz! X 官方 Git ](https://gitee.com/ComsenzDiscuz/DiscuzX) |
+| 主创团队   | 腾讯云COS                                                    |
 
 ## 2.功能特性
 
@@ -19,6 +20,7 @@
 ## 3.安装指引
 
 ### 3.1.部署方式一：通过GitHub部署离线安装
+
 > 1. git clone https://github.com/Tencent-Cloud-Plugins/tencentcloud-discuzx-plugin-cos
 > 2. 复制tencentcloud-discuzx-plugin-cos目录拷贝到discuzx的插件存放路径/source/plugin/文件夹里面
 > 3. 你的discuz站点管理中心=》插件=》安装插件**“腾迅云对象存储 1.0.1”**，后启用即可
@@ -36,9 +38,11 @@
 ### 4.1.界面功能介绍
 
 ![](./images/cos2.jpg)
+
 > 在Discuz！X站点后台插件模块中找到腾讯云对象存储插件安装启用。点击设置
 
 ![](./images/t1.jpg)
+
 > 填入个人存储桶的腾讯云对象存储的SecretId、SecretKey、所属地域、存储桶名4个信息
 > 填写好配置参数后可以点击上传图片和附件到cos
 
@@ -67,6 +71,7 @@
 ## 5.FAQ
 
 > 暂无
+
 ## 6.致谢
 
 此功能是在[Discux！X扩展框架](https://www.discuz.net/thread-3334048-1-1.html) 的基础上实现，特此对其主创团队进行致谢。
