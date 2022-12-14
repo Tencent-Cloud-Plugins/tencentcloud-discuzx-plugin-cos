@@ -6,7 +6,7 @@
 | 标题       | 内容                                                         |
 | ---------- | ------------------------------------------------------------ |
 | 中文名称     | 腾讯云对象存储扩展                                         |
-| 最新版本   | v1.0.1 (2022.11.30)                                         |
+| 最新版本   | v1.0.2 (2022.11.30)                                         |
 | 适用平台 | [Discuz! X3.4](https://www.discuz.net) |
 | 适用产品 | [腾讯云对象存储（COS）](https://cloud.tencent.com/product/cos)      |
 | GitHub项目| [Discuz! X 官方 Git ](https://gitee.com/ComsenzDiscuz/DiscuzX) |
